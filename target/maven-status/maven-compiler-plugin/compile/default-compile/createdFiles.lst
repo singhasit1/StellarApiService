@@ -1,0 +1,8 @@
+baseST\TestBase.class
+helper\LoggerHelper.class
+data\AreaBO.class
+data\AreasPojo.class
+resource\ResourceHelper.class
+util\TestUtil.class
+client\RestClient.class
+data\DeleteArea.class
