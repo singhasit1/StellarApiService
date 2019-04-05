@@ -22,7 +22,7 @@ Feature: Area Service API
     And   Verfiy That Header Content Type Is "application/json;charset=UTF-8"
 
 
-  @Sanity
+
   Scenario: Delete an Area
     Given The Apis "/areas/133" up and running for area service
     When  User Delete An Area As "South England"
