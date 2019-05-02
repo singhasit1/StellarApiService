@@ -51,30 +51,27 @@ public class RestClient {
 
     }
 
-    /*public CloseableHttpResponse put(String url, String entityString, HashMap<String, String> headerMap) throws ClientProtocolException, IOException{
+    public CloseableHttpResponse put(String url, String entityString, HashMap<String, String> headerMap) throws ClientProtocolException, IOException{
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPut httpput = new HttpPut(url);
-        // httpdelete.setEntity(new StringEntity(entityString)); //for payload
-        //for headers:
-     *//*   for(Map.Entry<String,String> entry : headerMap.entrySet()) {
-            httpdelete.addHeader(entry.getKey(), entry.getValue());
+        httpput.setEntity(new StringEntity(entityString));
+        for(Map.Entry<String,String> entry : headerMap.entrySet()) {
+            httpput.addHeader(entry.getKey(), entry.getValue());
         }
-        CloseableHttpResponse closebaleHttpResponse = httpClient.execute(httpdelete);
+        CloseableHttpResponse closebaleHttpResponse = httpClient.execute(httpput);
         return closebaleHttpResponse;
-*//*
-    }*/
 
-
+    }
 
     public CloseableHttpResponse delete(String url, String entityString, HashMap<String, String> headerMap) throws ClientProtocolException, IOException{
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpDelete httpdelete = new HttpDelete(url);
-       // httpdelete.setEntity(new StringEntity(entityString)); //for payload
+        HttpPost httppost = new HttpPost(url); //http post request
+        httppost.setEntity(new StringEntity(entityString)); //for payload
         //for headers:
         for(Map.Entry<String,String> entry : headerMap.entrySet()){
-            httpdelete.addHeader(entry.getKey(), entry.getValue());
+            httppost.addHeader(entry.getKey(), entry.getValue());
         }
-        CloseableHttpResponse closebaleHttpResponse = httpClient.execute(httpdelete);
+        CloseableHttpResponse closebaleHttpResponse = httpClient.execute(httppost);
         return closebaleHttpResponse;
 
     }

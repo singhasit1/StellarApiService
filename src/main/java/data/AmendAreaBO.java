@@ -1,4 +1,5 @@
 package data;
+
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -10,20 +11,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "area_key",
         "audience_set_key",
-        "area_code",
         "area_name",
         "area_desc",
         "modify_by"
 })
-public class AreaBO {
-
+public class AmendAreaBO {
     @JsonProperty("area_key")
     private Integer areaKey;
     @JsonProperty("audience_set_key")
     private Integer audienceSetKey;
-    @JsonProperty("area_code")
-    private String areaCode;
     @JsonProperty("area_name")
     private String areaName;
     @JsonProperty("area_desc")
@@ -37,26 +35,18 @@ public class AreaBO {
      * No args constructor for use in serialization
      *
      */
-    public AreaBO() {
+    public AmendAreaBO() {
     }
 
     /**
      *
+     * @param areaKey
      * @param modifyBy
      * @param areaName
-     * @param areaCode
      * @param areaDesc
      * @param audienceSetKey
      */
-    public AreaBO(Integer audienceSetKey, String areaCode, String areaName, String areaDesc, String modifyBy) {
-        super();
-        this.audienceSetKey = audienceSetKey;
-        this.areaCode = areaCode;
-        this.areaName = areaName;
-        this.areaDesc = areaDesc;
-        this.modifyBy = modifyBy;
-    }
-    public AreaBO(Integer areaKey, Integer audienceSetKey, String areaName, String areaDesc, String modifyBy) {
+    public AmendAreaBO(Integer areaKey, Integer audienceSetKey, String areaName, String areaDesc, String modifyBy) {
         super();
         this.areaKey = areaKey;
         this.audienceSetKey = audienceSetKey;
@@ -65,14 +55,14 @@ public class AreaBO {
         this.modifyBy = modifyBy;
     }
 
-    @JsonProperty("area_code")
-    public String getAreaCode() {
-        return areaCode;
+    @JsonProperty("area_key")
+    public Integer getAreaKey() {
+        return areaKey;
     }
 
-    @JsonProperty("area_code")
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    @JsonProperty("area_key")
+    public void setAreaKey(Integer areaKey) {
+        this.areaKey = areaKey;
     }
 
     @JsonProperty("audience_set_key")

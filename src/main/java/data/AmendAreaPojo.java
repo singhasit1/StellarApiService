@@ -9,17 +9,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * Created by Asit.Singh on 01-04-2019.
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "DispTarget",
         "DispAction",
         "areaBO"
 })
-public class AreasPojo {
-
+public class AmendAreaPojo {
     @JsonProperty("DispTarget")
     private Integer dispTarget;
     @JsonProperty("DispAction")
@@ -33,27 +29,21 @@ public class AreasPojo {
      * No args constructor for use in serialization
      *
      */
-    public AreasPojo() {
+    public AmendAreaPojo() {
     }
 
     /**
      *
      * @param dispAction
      * @param dispTarget
-     * @param areaBO
+     * @param areabo
      */
-    public AreasPojo(Integer dispTarget, String dispAction, AreaBO areaBO) {
+    public AmendAreaPojo(Integer dispTarget, String dispAction, AreaBO areabo) {
         super();
         this.dispTarget = dispTarget;
         this.dispAction = dispAction;
         this.areaBO = areaBO;
     }
-
-    public AreasPojo(Integer dispTarget, String dispAction) {
-        super();
-        this.dispTarget = dispTarget;
-        this.dispAction = dispAction;
-      }
 
     @JsonProperty("DispTarget")
     public Integer getDispTarget() {
@@ -94,4 +84,6 @@ public class AreasPojo {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
+
 }

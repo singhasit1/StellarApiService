@@ -67,13 +67,13 @@ public class AreaServiceTest extends TestBase {
             System.out.println("=======================================================================================================");
             System.out.println(responseJson);
             System.out.println("========================================================================================================");
-            String Area_Name = TestUtil.getValueByJPath(responseJson, "/data[0]/area_name");
+            String Area_Name = TestUtil.getValueByJPath(responseJson, "/data[3]/area_name");
             log.info("Area Name Is "+Area_Name);
-            String Area_Code = TestUtil.getValueByJPath(responseJson, "/data[0]/area_code");
+            String Area_Code = TestUtil.getValueByJPath(responseJson, "/data[3]/area_code");
             log.info("Area Code Is "+Area_Code);
-            String Area_Key = TestUtil.getValueByJPath(responseJson, "/data[0]/area_key");
+            String Area_Key = TestUtil.getValueByJPath(responseJson, "/data[3]/area_key");
             log.info("Area Key Is "+Area_Key);
-            String Audience_Set_Key = TestUtil.getValueByJPath(responseJson, "/data[0]/audience_set_key");
+            String Audience_Set_Key = TestUtil.getValueByJPath(responseJson, "/data[3]/audience_set_key");
             log.info("Audience Set Key Is "+Audience_Set_Key);
             Assert.assertEquals(Area_Name, data.get(1).get(1), "Area_name not match");
             log.info("Area Name Matched");
@@ -97,16 +97,7 @@ public class AreaServiceTest extends TestBase {
 
     @When("^Perform the POST request$")
     public void perform_the_POST_request() throws Throwable {
-        restClient = new RestClient();
-        HashMap<String, String> headerMap = new HashMap<String, String>();
-        headerMap.put("Content-Type", "application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        AreaBO areabO = new AreaBO(1, "SE", "South England", "Test description", "Asingh");
-        AreasPojo areaspojo = new AreasPojo(105, "insert", areabO);
-        mapper.writeValue(new File("D:\\StellarServiceAPI\\src\\main\\java\\data\\Area.json"), areaspojo);
-        String usersJsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(areaspojo);
-        JSONObject json = new JSONObject(usersJsonString);
-        closebaleHttpResponse = restClient.post(url, json.toString(), headerMap);
+
        // log.info("POST API calling");
     }
 
@@ -117,20 +108,103 @@ public class AreaServiceTest extends TestBase {
        // log.info("POST Response Code Matching");
     }
 
-    @When("^User Create A New Area As \"([^\"]*)\"$")
-    public void user_Create_A_New_Area_As(String CreatedArea) throws Throwable {
+    @When("^User Create A New Area Named As \"([^\"]*)\" and Area Code As \"([^\"]*)\"$")
+    public void user_Create_A_New_Area_Named_As_and_Area_Code_As(String CreateAreaName, String CreateAreaCode) throws Throwable {
 
-       // log.info("Created a new area as"+CreatedArea);
+        restClient = new RestClient();
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("Content-Type", "application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        AreaBO areabO = new AreaBO(1, CreateAreaCode, CreateAreaName, CreateAreaName, "Asingh");
+        AreasPojo areaspojo = new AreasPojo(105, "insert", areabO);
+        mapper.writeValue(new File("D:\\StellarServiceAPI\\src\\main\\java\\data\\Area.json"), areaspojo);
+        String usersJsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(areaspojo);
+        JSONObject json = new JSONObject(usersJsonString);
+        closebaleHttpResponse = restClient.post(url, json.toString(), headerMap);
     }
 
     @Then("^Verify That A New Data Created As \"([^\"]*)\"$")
     public void verify_That_A_New_Data_Created_As(String CreatedArea) throws Throwable {
 
-       // log.info("Created area Verified");
     }
+
+    @When("^User Specify The Area Key (\\d+) For Change The Area Name \"([^\"]*)\" To \"([^\"]*)\"$")
+    public void user_Specify_The_Area_Key_For_Change_The_Area_Name_To(int AreaKey, String AreaNm, String ChngAreaNm) throws Throwable {
+        restClient = new RestClient();
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("Content-Type", "application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        AreaBO areabo =  new AreaBO(AreaKey,1,ChngAreaNm,ChngAreaNm,"Asingh1");
+        AreasPojo areaspojo = new AreasPojo(105, "update", areabo);
+        mapper.writeValue(new File("D:\\StellarServiceAPI\\src\\main\\java\\data\\AmendArea.json"), areaspojo);
+        String usersJsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(areaspojo);
+        System.out.println(usersJsonString);
+        JSONObject json = new JSONObject(usersJsonString);
+        closebaleHttpResponse = restClient.put(url,json.toString(), headerMap); //call the API
+        Thread.sleep(5000);
+
+    }
+
+
+    @When("^User Amend An Area \"([^\"]*)\" To \"([^\"]*)\"$")
+    public void user_Amend_An_Area_To(String AreaName, String AreaName2) throws Throwable {
+
+
+    }
+    @When("^User Specify The Area Key \"([^\"]*)\" For Change$")
+    public void user_Specify_The_Area_Key_For_Change(String arg1) throws Throwable {
+
+    }
+
+    @When("^Perform the PUT request$")
+    public void perform_the_PUT_request() throws Throwable {
+
+
+    }
+    @Then("^Verfiy That PUT Response Code Should Be (\\d+)$")public void verfiy_That_PUT_Response_Code_Should_Be(int arg1) throws Throwable {
+        int statusCode = closebaleHttpResponse.getStatusLine().getStatusCode();
+        Assert.assertEquals(statusCode, testBase.RESPONSE_STATUS_CODE_200);
+    }
+
+
+    @Then("^Verify That Area Name \"([^\"]*)\" Should Replace To \"([^\"]*)\"$")
+    public void verify_That_Area_Name_Should_Replace_To(String arg1, String arg2) throws Throwable {
+
+    }
+
+
 
     @When("^User Delete An Area As \"([^\"]*)\"$")
     public void user_Delete_An_Area_As(String arg1) throws Throwable {
+        restClient = new RestClient();
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("Content-Type", "application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        //AreaBO areabo =  new AreaBO(161,1,"North England","North England","Asingh1");
+        AreasPojo areaspojo = new AreasPojo(105, "delete");
+        mapper.writeValue(new File("D:\\StellarServiceAPI\\src\\main\\java\\data\\DeleateArea.json"), areaspojo);
+        String usersJsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(areaspojo);
+        System.out.println(usersJsonString);
+        JSONObject json = new JSONObject(usersJsonString);
+        closebaleHttpResponse = restClient.delete(url,json.toString(), headerMap); //call the API
+        Thread.sleep(5000);
+        //validate response from API:
+        //1. status code:
+        int statusCode = closebaleHttpResponse.getStatusLine().getStatusCode();
+        Assert.assertEquals(statusCode, testBase.RESPONSE_STATUS_CODE_500);
+        //2. JsonString:
+        String responseString = EntityUtils.toString(closebaleHttpResponse.getEntity(), "UTF-8");
+        JSONObject responseJson = new JSONObject(responseString);
+        System.out.println("The response from API is:" + responseJson);
+        //json to java object:
+        AreasPojo Arearesponse = mapper.readValue(responseString, AreasPojo.class); //actual users object
+        System.out.println(Arearesponse);
+//        Assert.assertTrue(areaspojo.getAreaBO().getAreaName().equals(Arearesponse.getAreaBO().getAreaName()));
+        /*Assert.assertTrue(areaspojo.getAreaCode().equals(Arearesponse.getAreaCode()));
+        Assert.assertTrue(areaspojo.getAudienceSetKey().equals(Arearesponse.getAudienceSetKey()));
+        Assert.assertTrue(areaspojo.getAreaDesc().equals(Arearesponse.getAreaDesc()));
+        System.out.println(Arearesponse.getAreaName());
+        System.out.println(Arearesponse.getAreaCode());*/
 
     }
 

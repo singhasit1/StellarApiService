@@ -66,12 +66,7 @@ public class PostAPITEST extends TestBase {
         //json to java object:
         AreasPojo Arearesponse = mapper.readValue(responseString, AreasPojo.class); //actual users object
         System.out.println(Arearesponse);
-//        Assert.assertTrue(areaspojo.getAreaBO().getAreaName().equals(Arearesponse.getAreaBO().getAreaName()));
-        /*Assert.assertTrue(areaspojo.getAreaCode().equals(Arearesponse.getAreaCode()));
-        Assert.assertTrue(areaspojo.getAudienceSetKey().equals(Arearesponse.getAudienceSetKey()));
-        Assert.assertTrue(areaspojo.getAreaDesc().equals(Arearesponse.getAreaDesc()));
-        System.out.println(Arearesponse.getAreaName());
-        System.out.println(Arearesponse.getAreaCode());*/
+
     }
 }
 
